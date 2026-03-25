@@ -1,0 +1,7 @@
+<h1>เลือกตั้ง 2026</h1>
+{% for person in candidates %}
+    <div>
+        <h3>{{ person.name }}</h3>
+        <a href="{% url 'cast_vote' person.id %}">ลงคะแนน</a>
+    </div>
+{% endfor %}
