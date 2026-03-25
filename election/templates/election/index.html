@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head><title>ระบบเลือกตั้งอย่างง่าย</title></head>
+<body>
+    <h1>ระบบเลือกตั้ง: คุณกำลังใช้งานเป็น [ {{ username }} ]</h1>
+
+{% if not has_voted %}
+    <h3>กรุณาลงคะแนน:</h3>
+    {% for c in candidates %}
+        <button><a href="{% url 'vote' username c.id %}">โหวตเบอร์ {{ c.number }}</a></button>
+    {% endfor %}
+{% else %}
+    <p style="color: blue;">คุณ ({{ username }}) โหวตให้: {{ my_vote.candidate.name }} เรียบร้อยแล้ว</p>
+{% endif %}
+
+<hr>
+<h3>สลับ User เพื่อทดสอบ:</h3>
+<a href="/user01/">เข้าใช้งานเป็น user01</a> | 
+<a href="/user02/">เข้าใช้งานเป็น user02</a> | 
+<a href="/user03/">เข้าใช้งานเป็น user03</a>
+
+<hr>
+<h2>สรุปผลโหวตทั้งหมด</h2>
+{% for r in results %}
+    <p>{{ r.name }}: {{ r.total_votes }} คะแนน</p>
+{% endfor %}
+    </ul>
+</body>
+</html>

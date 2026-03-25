@@ -9,9 +9,9 @@ class Candidate(models.Model):
         return f"{self.number}: {self.name}"
 
 class Vote(models.Model):
-    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
-    session_id = models.CharField(max_length=100) # เก็บ ID ของ Browser นั้นๆ
+    candidate = models.ForeignKey(Candidate, on_object=models.CASCADE)
+    voter_name = models.CharField(max_length=50) 
     voted_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('session_id',) # 1 Session โหวตได้ครั้งเดียว
+        unique_together = ('voter_name',) 
