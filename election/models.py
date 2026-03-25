@@ -9,9 +9,10 @@ class Candidate(models.Model):
         return f"{self.number}: {self.name}"
 
 class Vote(models.Model):
-    ccandidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
-    voter_name = models.CharField(max_length=50) 
+    # ต้องสะกดว่า candidate (ตัวเล็กทั้งหมด)
+    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
+    voter_name = models.CharField(max_length=50)
     voted_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('voter_name',) 
+        unique_together = ('voter_name',)

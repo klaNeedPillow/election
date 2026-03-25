@@ -22,5 +22,6 @@ def index(request, username):
 def cast_vote(request, username, candidate_id):
     candidate = Candidate.objects.get(id=candidate_id)
     if not Vote.objects.filter(voter_name=username).exists():
+        
         Vote.objects.create(candidate=candidate, voter_name=username)
     return redirect('index', username=username)
