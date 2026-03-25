@@ -1,29 +1,93 @@
 <!DOCTYPE html>
-<html>
-<head><title>ระบบเลือกตั้งอย่างง่าย</title></head>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบเลือกตั้ง 2026</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .candidate-card { transition: transform 0.2s; border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .candidate-card:hover { transform: translateY(-5px); }
+    </style>
+</head>
 <body>
-    <h1>ระบบเลือกตั้ง: คุณกำลังใช้งานเป็น [ {{ username }} ]</h1>
 
-{% if not has_voted %}
-    <h3>กรุณาลงคะแนน:</h3>
-    {% for c in candidates %}
-        <button><a href="{% url 'vote' username c.id %}">โหวตเบอร์ {{ c.number }}</a></button>
-    {% endfor %}
-{% else %}
-    <p style="color: blue;">คุณ ({{ username }}) โหวตให้: {{ my_vote.candidate.name }} เรียบร้อยแล้ว</p>
-{% endif %}
+<nav class="navbar navbar-dark bg-primary mb-4">
+    <div class="container">
+        <span class="navbar-brand mb-0 h1">E-Voting System 2026</span>
+        <span class="text-white">กำลังใช้งานเป็น: <strong>{{ username }}</strong></span>
+    </div>
+</nav>
 
-<hr>
-<h3>สลับ User เพื่อทดสอบ:</h3>
-<a href="/user01/">เข้าใช้งานเป็น user01</a> | 
-<a href="/user02/">เข้าใช้งานเป็น user02</a> | 
-<a href="/user03/">เข้าใช้งานเป็น user03</a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="mb-4">รายชื่อผู้สมัคร</h2>
+            
+            {% if has_voted %}
+                <div class="alert alert-success d-flex align-items-center" role="alert">
+                    <div>
+                        ✅ คุณ (<strong>{{ username }}</strong>) ลงคะแนนเรียบร้อยแล้ว ให้กับ: 
+                        <strong>{{ my_vote.candidate.name }} (เบอร์ {{ my_vote.candidate.number }})</strong>
+                    </div>
+                </div>
+            {% endif %}
 
-<hr>
-<h2>สรุปผลโหวตทั้งหมด</h2>
-{% for r in results %}
-    <p>{{ r.name }}: {{ r.total_votes }} คะแนน</p>
-{% endfor %}
-    </ul>
+            <div class="row g-3">
+                {% for c in candidates %}
+                <div class="col-md-6">
+                    <div class="card candidate-card h-100">
+                        <div class="card-body text-center">
+                            <h1 class="display-4 text-primary fw-bold">{{ c.number }}</h1>
+                            <h5 class="card-title">{{ c.name }}</h5>
+                            <p class="card-text text-muted small">{{ c.policy }}</p>
+                            
+                            {% if not has_voted %}
+                                <a href="{% url 'vote' username c.id %}" class="btn btn-outline-primary w-100 mt-2">ลงคะแนน</a>
+                            {% else %}
+                                <button class="btn btn-secondary w-100 mt-2" disabled>โหวตแล้ว</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4 border-0 shadow-sm">
+                <div class="card-header bg-white fw-bold">สลับทดสอบ User</div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <a href="/user01/" class="list-group-item list-group-item-action {% if username == 'user01' %}active{% endif %}">User 01</a>
+                        <a href="/user02/" class="list-group-item list-group-item-action {% if username == 'user02' %}active{% endif %}">User 02</a>
+                        <a href="/user03/" class="list-group-item list-group-item-action {% if username == 'user03' %}active{% endif %}">User 03</a>
+                    </div>
+                    <p class="text-muted small mt-2">* เปลี่ยนชื่อใน URL เพื่อเพิ่ม User ใหม่ได้</p>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-dark text-white fw-bold">ผลคะแนนปัจจุบัน</div>
+                <div class="card-body">
+                    {% for r in results %}
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>เบอร์ {{ r.number }} ({{ r.name }})</span>
+                            <span class="fw-bold">{{ r.total_votes }} คะแนน</span>
+                        </div>
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ r.total_votes }}0%"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
