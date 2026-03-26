@@ -1,0 +1,53 @@
+[33mcommit f75fae610f7f038101a7d699675165237d6a69a1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: klaNeedPillow <nametongla@gmail.com>
+Date:   Wed Mar 25 21:16:11 2026 +0700
+
+    Hard reset migrations and database to fix candidate_id column error
+
+[33mcommit 699c5b1e2aac7f2e0b2af3a5e6827fdfbbfe2e87[m
+Author: klaNeedPillow <nametongla@gmail.com>
+Date:   Wed Mar 25 21:04:07 2026 +0700
+
+    Reset migrations and database with correct voter_name field
+
+[33mcommit 7a0ab4da4569d0ecd8e0517c5fe7de1d30c0d613[m
+Author: klaNeedPillow <nametongla@gmail.com>
+Date:   Wed Mar 25 20:28:44 2026 +0700
+
+    Change to URL-based user tracking for easy switching
+
+[33mcommit a23c83c32dea87b2f32b48c944e4402d1d08f486[m
+Author: klaNeedPillow <nametongla@gmail.com>
+Date:   Wed Mar 25 20:18:24 2026 +0700
+
+    Create election/urls.py and link to project urls
+
+[33mcommit a3e2006fdf76a4841c1521fd405ccb3b9e008a0a[m
+Author: klaNeedPillow <nametongla@gmail.com>
+Date:   Wed Mar 25 20:12:29 2026 +0700
+
+    Add Vote model with session tracking
+
+[33mcommit d44af84c10f8a6e5e2291f85f395e1b2fda97cdb[m
+Author: klaNeedPillow <nametongla@gmail.com>
+Date:   Wed Mar 25 20:11:42 2026 +0700
+
+    Add Vote model with session tracking
+
+[33mcommit 61fc89671155720e4afd39584335d8d80301e315[m
+Author: klaNeedPillow <nametongla@gmail.com>
+Date:   Wed Mar 25 20:09:40 2026 +0700
+
+    Register election app and create Candidate model
+
+[33mcommit 998575cb5cf5e6c7fa79defbc7fae582d84f9134[m
+Author: klaNeedPillow <nametongla@gmail.com>
+Date:   Wed Mar 25 20:07:30 2026 +0700
+
+    Add basic voting logic and index template
+
+[33mcommit 552ffd35fdc630b36372f4c2b55e226dc45f787f[m
+Author: klaNeedPillow <nametongla@gmail.com>
+Date:   Wed Mar 25 20:05:02 2026 +0700
+
+    Initial commit: Base Django project with voting app

@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from .models import Candidate, Vote
 from django.db.models import Count
 
+def root_redirect(request):
+    return redirect('index', username='user01')
+
 def index(request, username):
     candidates = Candidate.objects.all()
     
